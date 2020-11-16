@@ -7,7 +7,6 @@
  
     background-image:url(../../assets/snake_rewind_may_14th.gif);
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-size: cover;
 }
 .container{
@@ -65,4 +64,16 @@
   .button:active {
 	top: 2px;
   }
-  
+  .signUpButton{
+    margin-top: 5px;
+    align-self:flex-end;
+    background: transparent;
+    color:cyan;
+    outline:none;
+    border: none;
+    cursor: pointer;
+  }
+  .header{
+    color:white;
+    align-self: center;
+  }
