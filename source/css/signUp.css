@@ -8,6 +8,8 @@
     background-image:url(../../assets/snake_rewind_may_14th.gif);
     background-repeat: no-repeat;
     background-size: cover;
+    /* background-position: center; */
+    background-color: black;
 }
 .container{
     display: flex;
@@ -16,7 +18,7 @@
 .inputs{
     display: flex;
     flex-direction: column;
-    margin-top:100px;
+    margin-top:80px;
 }
 .input{
     width: 300px;
