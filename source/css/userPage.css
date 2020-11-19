@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+}
+.background{
+ 
+    background-image:url(../../assets/snake_rewind_may_14th.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center; */
+    background-color: black;
+}
+.container{
+    display: flex;
+    justify-content: flex-start;
+}
+.header{
+    color:white;
+    align-self: center;
+    font-size: 48px;
+    font-weight: bold;
+    
+}
+.Content{
+    margin-top: 10%;
+    margin-left: 24px;
+    display: flex;
+    flex-direction: column;
+}
+.buttons{
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+
+}
+.button{
+    margin-bottom: 12px;
+    width: 392px;
+    height: 60px;
+    cursor: pointer;
+}
+
