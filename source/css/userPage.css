@@ -41,3 +41,99 @@
     cursor: pointer;
 }
 
+.button1{
+	font-family: "Roboto", sans-serif;
+	font-weight: 500;
+	outline: none !important;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	color: var(--inv);
+
+}
+.button1 {
+	border: 2px solid #000;
+	z-index: 1;
+}
+.button1:after {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: -1;
+	background: black;
+	transition: all 0.3s ease;
+}
+.button1:hover {
+    color: #fff;
+}
+.button1:hover:after {
+    left: 0;
+    width: 100%;
+}
+.button1:active {
+    top: 2px;
+}
+  
+.button3{
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    color: var(--inv);
+
+}
+.button3 {
+	border: 2px solid #000;
+	z-index: 1;
+}
+.button3:after {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: -1;
+	background: black;
+	transition: all 0.3s ease;
+}
+.button3:hover {
+    color: #fff;
+}
+.button3:hover:after {
+	right: 0;
+	width: 100%;
+}
+.button3:active {
+    top: 2px;
+}
+.button2{
+    
+    border: 2px solid #2e2e2e;
+    cursor: pointer;
+    letter-spacing: 0.2125rem;
+    overflow: hidden;
+    padding: 10px 30px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+    transition: background 3s
+    cubic-bezier(0.19, 1, 0.22, 1),
+    border 1s cubic-bezier(0.19, 1, 0.22, 1), 
+    color 0.6s cubic-bezier(0.20, 1, 0.22, 1);
+    user-select: none;
+}
+.button2:hover{
+    background-color: rgba(209, 204, 204, 0.05);
+    border-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 245, 245, 0.8);
+    transition: background 1s;
+    color: rgb(192, 189, 189);
+}

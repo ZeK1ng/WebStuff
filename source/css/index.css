@@ -45,7 +45,7 @@
                 color 0.6s cubic-bezier(0.20, 1, 0.22, 1);
       user-select: none;
 }
-button:hover{
+.button:hover{
   background-color: rgba(209, 204, 204, 0.05);
     border-color: #fff;
     box-shadow: 0 0 5px rgba(255, 245, 245, 0.8);
