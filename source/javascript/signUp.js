@@ -31,7 +31,7 @@ document.getElementById("signUpButton").addEventListener("click" ,function(){
       };
       console.log("Sending")
       xmlhttp.send("params=" + params);
-
+      window.location.href="userPage.html"
     }
      
 
