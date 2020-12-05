@@ -21,7 +21,7 @@ header("Access-Control-Allow-Headers: *");
 $params = $_POST['params'];
 // print $params;
 $status = "success";
-$myfile = fopen("db.txt", "a+") or die("Unable to open file!");
+$myfile = fopen("dbUsernameScore.txt", "a+") or die("Unable to open file!");
 
 fwrite($myfile,$params);
 fclose($myfile);

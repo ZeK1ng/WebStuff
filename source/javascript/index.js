@@ -1,22 +1,68 @@
-var userName =""
-var password = ""
+var userName =''
+var password = ''
+var userPassMap=new Map();
 var xmlhttp = new XMLHttpRequest();
-xmlhttp.open("GET", "http://127.0.0.1:8000/source/php/fileReader.php", true);
-xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+localStorage.clear();
+xmlhttp.open('GET', 'http://127.0.0.1:8000/source/php/readUserPass.php', true);
+xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 xmlhttp.onreadystatechange = function() {
     if (this.readyState===4 && this.status === 200){ 
-        console.log("ASDAS")
-        console.log(this.responseText); // echo from php?
+        let userNamePasswords = JSON.parse(this.responseText);
+        for(var i = 0; i< userNamePasswords.length-1; i++){
+            var tuple = userNamePasswords[i];
+            let sepInd = tuple.indexOf(' ');
+            let currUsername = tuple.substr(0,sepInd);
+            let currPassWord = tuple.substring(sepInd+1,tuple.length-1);
+            userPassMap.set(currUsername,currPassWord);
+        }
     }       
 };
-xmlhttp.send("params=");
+xmlhttp.send('params=');
 
-document.getElementById("loginButton").addEventListener("click" ,function(){
-    userName = document.getElementById("LoginUsername").value
-    password = document.getElementById("LoginUserPass").value 
-    console.log(userName,password)
+document.getElementById('loginButton').addEventListener('click' ,function(){
+    userName = document.getElementById('LoginUsername').value.trim()
+    password = document.getElementById('LoginUserPass').value.trim()
+    console.log(userPassMap)
+    if (userName.length == 0 || password.length == 0){
+ 
+        if(userName.length == 0){
+         document.getElementById('LoginUsername').style.borderColor = 'red';
+        }
+        if (password.length == 0 ){
+          document.getElementById('LoginUserPass').style.borderColor = 'red';
+        }
+    }
+    if(userName.length != 0 && password.length !=0){
+       
+        if(userPassMap.has(userName) && userPassMap.get(userName) == password){
+            localStorage.setItem('active',userName);
+        }
+        var req = new XMLHttpRequest();
+        req.open('GET', 'http://127.0.0.1:8000/source/php/readUserScores.php', true);
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.onreadystatechange = function() {
+            if (this.readyState===4 && this.status === 200){ 
+                let userNameScores = JSON.parse(this.responseText);
+                var userScoreArr = []
+                for(var i = 0; i< userNameScores.length-1; i++){
+                    var tuple =userNameScores[i];
+                    let sepInd = tuple.indexOf(' ');
+                    let currUsername = tuple.substr(0,sepInd);
+                    let currScore = tuple.substring(sepInd+1,tuple.length-1);
+                    var user = { 'name':'value' , 'score':'value'}
+                    user.name = currUsername
+                    user.score = currScore;
+                    userScoreArr.push(user);
+                }
+                localStorage.setItem('userScores',JSON.stringify(userNameScores));
+                window.location.href = 'userPage.html';
+            }       
+        };
+        req.send('params=');
+    }
+    
 });
-document.getElementById("signUp").addEventListener("click",function(){
-    window.location.href="signUp.html"
+document.getElementById('signUp').addEventListener('click',function(){
+    window.location.href='signUp.html'
 });
 
