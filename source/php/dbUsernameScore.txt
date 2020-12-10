@@ -1,3 +1,4 @@
-Admin 0
-David 0
-Dave 0
+Admin 100
+David 20
+Dave 10
+Admin1 20

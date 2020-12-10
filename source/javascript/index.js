@@ -19,7 +19,15 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.send('params=');
 
-document.getElementById('loginButton').addEventListener('click' ,function(){
+document.getElementById('loginButton').addEventListener('click', login);
+document.addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){
+        login()
+    }
+});
+
+
+function login(){
     userName = document.getElementById('LoginUsername').value.trim()
     password = document.getElementById('LoginUserPass').value.trim()
     console.log(userPassMap)
@@ -35,33 +43,40 @@ document.getElementById('loginButton').addEventListener('click' ,function(){
     if(userName.length != 0 && password.length !=0){
        
         if(userPassMap.has(userName) && userPassMap.get(userName) == password){
-            localStorage.setItem('active',userName);
+            localStorage.setItem('activeUser',userName);
+
+            var req = new XMLHttpRequest();
+            req.open('GET', 'http://127.0.0.1:8000/source/php/readUserScores.php', true);
+            req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            req.onreadystatechange = function() {
+                if (this.readyState===4 && this.status === 200){ 
+                    let userNameScores = JSON.parse(this.responseText);
+                    var userScoreArr = []
+                    for(var i = 0; i< userNameScores.length-1; i++){
+                        var tuple =userNameScores[i];
+                        let sepInd = tuple.indexOf(' ');
+                        let currUsername = tuple.substr(0,sepInd);
+                        let currScore = tuple.substring(sepInd+1,tuple.length-1);
+                        var user = { 'name':'value' , 'score':'value'}
+                        user.name = currUsername
+                        user.score = currScore;
+                        if(currUsername == userName){
+                            localStorage.setItem('activeScore',currScore);
+                        }
+                        userScoreArr.push(user);
+                    }
+                    localStorage.setItem('userScores',JSON.stringify(userScoreArr));
+                    window.location.href = 'userPage.html';
+                }       
+            };
+            req.send('params=');
+        }else{
+            window.alert('Wrong username or password');
         }
-        var req = new XMLHttpRequest();
-        req.open('GET', 'http://127.0.0.1:8000/source/php/readUserScores.php', true);
-        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        req.onreadystatechange = function() {
-            if (this.readyState===4 && this.status === 200){ 
-                let userNameScores = JSON.parse(this.responseText);
-                var userScoreArr = []
-                for(var i = 0; i< userNameScores.length-1; i++){
-                    var tuple =userNameScores[i];
-                    let sepInd = tuple.indexOf(' ');
-                    let currUsername = tuple.substr(0,sepInd);
-                    let currScore = tuple.substring(sepInd+1,tuple.length-1);
-                    var user = { 'name':'value' , 'score':'value'}
-                    user.name = currUsername
-                    user.score = currScore;
-                    userScoreArr.push(user);
-                }
-                localStorage.setItem('userScores',JSON.stringify(userNameScores));
-                window.location.href = 'userPage.html';
-            }       
-        };
-        req.send('params=');
+        
     }
-    
-});
+}
+
 document.getElementById('signUp').addEventListener('click',function(){
     window.location.href='signUp.html'
 });

@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -146,8 +147,7 @@
 .glitch {
     color: rgb(245, 21, 5);
     position: relative;
-    font-size: 100px;
-    // margin: 70px 200px;
+    font-size: 88px;
     animation: glitch 3s 3s infinite;
   }
   
@@ -266,5 +266,86 @@
       transform: rotateX(0deg) skewX(0deg);
     }
   }
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  align-self:center;
+  left:40%;
+  min-height: 200px;
+  width: 300px;
+  overflow: auto;
+  background-color: rgb(255, 153, 51,0.4);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  border-radius: 8px;
+}
+@keyframes modalopen{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+  padding-right: 24px;
+  padding-left:35%;
+}
+.modal-row{
+  
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-right: 24px;
+  padding-left : 24px;
+}
+.name-score{
+  color:white;
+  font-size: 24px;
+}
+:root {
+  --shadow-color: #FF9E9E;
+  --shadow-color-light: white;
+}
+
+.name-score {
+  color: white;
+  animation: neon 3s infinite;
+}
+.headerText{
+  color: white;
+
+  animation: neon 3s infinite;
+}
+
+@keyframes neon {
+  0% {
+    text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+    0 0 3px var(--shadow-color-light), 0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+    0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color), 0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+  }
+  50% {
+    text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+    0 0 5px var(--shadow-color-light), 0 0 15px var(--shadow-color-light), 0 0 25px var(--shadow-color-light),
+    0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 60px var(--shadow-color), 0 0 80px var(--shadow-color), 0 0 110px var(--shadow-color), 0 0 210px var(--shadow-color);
+  }
+  100% {
+    text-shadow: -1px -1px 1px var(--shadow-color-light), -1px 1px 1px var(--shadow-color-light), 1px -1px 1px var(--shadow-color-light), 1px 1px 1px var(--shadow-color-light),
+    0 0 3px var(--shadow-color-light), 0 0 10px var(--shadow-color-light), 0 0 20px var(--shadow-color-light),
+    0 0 30px var(--shadow-color), 0 0 40px var(--shadow-color), 0 0 50px var(--shadow-color), 0 0 70px var(--shadow-color), 0 0 100px var(--shadow-color), 0 0 200px var(--shadow-color);
+  }
+}
+
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+}
   
   
