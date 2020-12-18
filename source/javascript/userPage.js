@@ -5,7 +5,7 @@
 if(localStorage.getItem('activeUser') == null){
     window.location.href ='index.html';
 }
-var userScores =JSON.parse(localStorage.getItem('userScores'));
+// var userScores =JSON.parse(localStorage.getItem('userScores'));
 // console.log(userScores);
 const modal= document.getElementById('modal');
 document.getElementById("welcomeText").innerHTML = 'Welcome '+localStorage.getItem('activeUser');
@@ -29,6 +29,11 @@ document.getElementById('signOut').addEventListener('click' ,function() {
     window.location.href = 'index.html';
 });
 document.getElementById('rankButton').addEventListener('click',function(){
+    var userScores =[]
+    const data = JSON.parse(localStorage.getItem('userData'))
+    for(let i=0;i<data.length; i++) {
+        userScores.push({name:data[i].name,score:data[i].userHighScore})
+    }
     userScores.sort(function(a,b){
         var val1 = parseInt(a.score,10); 
         var val2 = parseInt(b.score,10);
@@ -85,7 +90,7 @@ document.getElementById('myScoreButton').addEventListener('click',function(){
     rowDataname.innerHTML = localStorage.getItem('activeUser');
     rowDataname.className=('name-score');
     var rowDatascore = document.createElement('SPAN');
-    rowDatascore.innerHTML = localStorage.getItem('activeScore');
+    rowDatascore.innerHTML = localStorage.getItem('userHighScore');
     rowDatascore.className=('name-score');
     modalRow.appendChild(rowDataname);
     modalRow.appendChild(rowDatascore);
