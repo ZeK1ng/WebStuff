@@ -26,7 +26,7 @@ myAudio.onpause = function() {
 };
 document.getElementById('signOut').addEventListener('click' ,function() {
     localStorage.removeItem('active');
-    window.location.href = 'index.html';
+    window.location.href = '/WebStuff/source/html/index.html';
 });
 document.getElementById('rankButton').addEventListener('click',function(){
     var userScores =[]

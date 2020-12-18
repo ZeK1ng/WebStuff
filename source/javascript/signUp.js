@@ -50,7 +50,7 @@ function signUp(){
     localStorage.setItem('userData',JSON.stringify(data));
     localStorage.setItem('activeUser',userName)
     localStorage.setItem('userHighScore',0)
-    window.location.href='userPage.html'
+    window.location.href='/WebStuff/source/html/userPage.html'
     //check user details
     //if user exists throw error 
     // else put it in db and go to main page
@@ -84,7 +84,7 @@ function signUp(){
   }
 }
 document.getElementById('loginButton').addEventListener('click' ,function(){
-  window.location.href = 'index.html'
+  window.location.href = '/WebStuff/source/html/index.html'
 });
 function _includesName(data,name){
   for(let i =0 ; i<data.length; i++){

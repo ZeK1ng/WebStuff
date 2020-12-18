@@ -91,5 +91,5 @@ function _containsUser(data,userName,password){
 }
 
 document.getElementById('signUp').addEventListener('click',function(){
-    window.location.href='signUp.html'
+    window.location.href='/WebStuff/source/html/signUp.html'
 });
