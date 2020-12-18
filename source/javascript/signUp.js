@@ -84,7 +84,7 @@ function signUp(){
   }
 }
 document.getElementById('loginButton').addEventListener('click' ,function(){
-  window.location.href = '../../../index.html'
+  window.location.href = 'index.html'
 });
 function _includesName(data,name){
   for(let i =0 ; i<data.length; i++){

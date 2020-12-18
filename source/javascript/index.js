@@ -47,7 +47,7 @@ function login(){
         if(i > -1){
             localStorage.setItem('activeUser',userName);
             localStorage.setItem('userHighScore',data[i].userHighScore)
-            window.location.href = 'source/html/userPage.html'
+            window.location.href = 'userPage.html'
         }else{
             window.alert('Wrong username or password');
         } 
@@ -91,5 +91,5 @@ function _containsUser(data,userName,password){
 }
 
 document.getElementById('signUp').addEventListener('click',function(){
-    window.location.href='source/html/signUp.html'
+    window.location.href='signUp.html'
 });
