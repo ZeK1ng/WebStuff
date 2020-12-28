@@ -43,10 +43,22 @@
             </div>
          
             <div class = "btns" id="btns-id">
-                <!--Buttons -->
+                <span class="SnakeText" id="PlayerNameHolder"></span>
+                <div class ="SnakeText" id="userHighScore"></div>
+                <div class="score-holder" id="currScoreUser"></div>
+                <button class="button">Save</button>
+                <button class="button">Quit</button>
+                <!-- next level button -->
             </div>
             
         </div>
     </div>
 </body>
+<script>
+    const userName = localStorage.getItem('activeUser')
+    var userHighscore = localStorage.getItem('userHighScore')
+    console.log(userName)
+    document.getElementById("PlayerNameHolder").innerHTML=userName
+    document.getElementById("userHighScore").innerHTML ="HighScore: "+ userHighscore
+</script>
 </html>

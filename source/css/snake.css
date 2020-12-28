@@ -65,6 +65,10 @@
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+  .btns {
+    display: flex;
+    flex-direction: column;
+  }
   .space-bar {
       width: 100px;
       height: 20px;
@@ -99,15 +103,29 @@
     align-items: center;
 }
 .button{
-    width: 70px;
+  width: 300px;
     height: 50px;
-    margin-left: 10px;
-    border-radius: 25%;
-    background-color:green;
-    font-family: sans-serif;
-    line-height: 50px;
-    text-align: center;
-    cursor: pointer;
+    margin-top: 20px;
+  border: 2px solid #2e2e2e;
+      cursor: pointer;
+      letter-spacing: 0.2125rem;
+      overflow: hidden;
+      padding: 10px 30px;
+      position: relative;
+      text-align: center;
+      text-transform: uppercase;
+      transition: background 3s
+               cubic-bezier(0.19, 1, 0.22, 1),
+                border 1s cubic-bezier(0.19, 1, 0.22, 1), 
+                color 0.6s cubic-bezier(0.20, 1, 0.22, 1);
+      user-select: none;
+}
+.button:hover{
+  background-color: rgba(209, 204, 204, 0.05);
+    border-color: #fff;
+    box-shadow: 0 0 5px rgba(255, 245, 245, 0.8);
+    transition: background 1s;
+    color: rgb(192, 189, 189);
 }
 .button:focus{
     outline: 0;
