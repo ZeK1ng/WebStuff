@@ -45,7 +45,7 @@
             <div class = "btns" id="btns-id">
                 <span class="SnakeText" id="PlayerNameHolder"></span>
                 <div class ="SnakeText" id="userHighScore"></div>
-                <div class="score-holder" id="currScoreUser"></div>
+                <div class="SnakeText" id="currScoreUser"></div>
                 <button class="button">Save</button>
                 <button class="button">Quit</button>
                 <!-- next level button -->
@@ -60,5 +60,7 @@
     console.log(userName)
     document.getElementById("PlayerNameHolder").innerHTML=userName
     document.getElementById("userHighScore").innerHTML ="HighScore: "+ userHighscore
+    document.getElementById("currScoreUser").innerHTML ="currentScore: "+ 0
+
 </script>
 </html>

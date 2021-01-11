@@ -31,9 +31,10 @@ class Snake{
         this._maxCols = this._maxWidth/this._boxSize;
         this._gameon=false;
         this._direction = "right";
-
+        this._superFruitCount = 0
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
+        this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
         this._fruit=[
             {
                 row: 0,
@@ -44,9 +45,7 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
-        if(!("maxScore" in localStorage)){
-            localStorage.setItem("maxScore",0);
-        }
+      
     }
     /**
      * Getter Methods
@@ -119,7 +118,7 @@ class Snake{
             this._direction = "down";
         }
         if(e.keyCode == key_space) {
-            for(var i =1; i<5;i++){
+            for(var i =1; i<3;i++){
                 this._moveSnakeOneStep()
             }
         }
@@ -190,6 +189,16 @@ class Snake{
         fruit.style.left=this._fruit[0].col*this._boxSize+"px";
         this._screen.append(fruit);
     }
+    _addSuperFruit(){
+        const fruit = document.createElement("div");
+        fruit.classList.add("box");
+        fruit.classList.add("box-super-fruit");  
+        fruit.id="fruit-id"
+        this._assignRandomCords();
+        fruit.style.top=this._fruit[0].row*this._boxSize+"px";
+        fruit.style.left=this._fruit[0].col*this._boxSize+"px";
+        this._screen.append(fruit);
+    }
     /**
      * Assigns random Coordinates to the fruit. If these random Cords. are part of the snake , the coordiantes are reassigned .
      */
@@ -219,7 +228,8 @@ class Snake{
         }
         this._direction="right";
         this._score =0;
-        // this._scoreBoard.innerHTML="SCORE:"+this._score;
+        document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
+        document.get
         this._addFruit();
         this._addSnake();
     }
@@ -249,7 +259,7 @@ class Snake{
         this._moveSnakeOneStep();
     }
     
-    /**
+    /**657
      * handels One snake Step. If there is a collision with the walls , player loses 
      * If the collision is with the fruit , the snake consumes it , increasing his size 
      * 
@@ -277,12 +287,38 @@ class Snake{
 
         let isFruit = false;
         if(newRow==this._fruit[0].row && newCol == this._fruit[0].col){
-            const fruit = document.getElementById("fruit-id");
-            this._screen.removeChild(fruit);
-            this._addFruit();
-            this._score++;
-            // this._scoreBoard.innerHTML="SCORE:"+this._score;
-            isFruit=true;
+            if(this._superFruitCount == 5){
+                const fruit = document.getElementById("fruit-id");
+                this._screen.removeChild(fruit);
+                this._addFruit();
+                this._score+=100;
+                this._superFruitCount = 0
+                // this._scoreBoard.innerHTML="SCORE:"+this._score;
+                document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
+                if(this._highScore< this._score) {
+                    this._highScore = this._score ;
+                    document.getElementById('userHighScore').innerHTML = "HighScore: "+ this._highScore
+                    localStorage.setItem('userHighScore',this._highScore)
+                }
+                isFruit=true;
+            }else{
+                const fruit = document.getElementById("fruit-id");
+                this._screen.removeChild(fruit);
+                this._superFruitCount++;
+                this._score+=20;
+                if (this._superFruitCount == 5){
+                    this._addSuperFruit();
+                }else {
+                    this._addFruit();
+                }
+                document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
+                if(this._highScore< this._score) {
+                    this._highScore = this._score ;
+                    document.getElementById('userHighScore').innerHTML = "HighScore: "+ this._highScore
+                    localStorage.setItem('userHighScore',this._highScore)
+                }
+                isFruit=true;
+            }
         }
         if(!isFruit){
             this._snake.pop();
