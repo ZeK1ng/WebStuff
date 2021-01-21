@@ -105,5 +105,7 @@ document.addEventListener('click',function(e){
 
  
  document.getElementById('play').addEventListener('click', function(){
-    window.location.href='/WebStuff/source/html/snake.html';
+    // window.location.href='/WebStuff/source/html/snake.html';
+    window.location.href='snake.html';
+
  });

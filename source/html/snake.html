@@ -11,7 +11,8 @@
 <body class = "background">
     
     <div class = "container">
-        
+        <img id="playMusic" src="../../assets/notelogo.jpg" class="musicImg" >   
+        <audio loop id ="cbaudio" src="../../assets/cbmusic.mp3" preload="auto"></audio>
         <div class ="wrapper">
             <div class="controls">
                 <div class="control-item">
@@ -46,8 +47,8 @@
                 <span class="SnakeText" id="PlayerNameHolder"></span>
                 <div class ="SnakeText" id="userHighScore"></div>
                 <div class="SnakeText" id="currScoreUser"></div>
-                <button class="button">Save</button>
-                <button class="button">Quit</button>
+                <button class="button" id="save-btn">Save</button>
+                <button class="button" id="quit-btn">Quit</button>
                 <!-- next level button -->
             </div>
             
@@ -61,6 +62,25 @@
     document.getElementById("PlayerNameHolder").innerHTML=userName
     document.getElementById("userHighScore").innerHTML ="HighScore: "+ userHighscore
     document.getElementById("currScoreUser").innerHTML ="currentScore: "+ 0
-
+    // document.getElementById("save-btn").addEventListener('click',saveData);
+    document.getElementById('quit-btn').addEventListener('click',quitGame);
+    function quitGame(){
+        window.location.href = 'userPage.html';   
+    }
+    var musicLogo = document.getElementById("playMusic")
+    var isPlaying = false;
+    var myAudio = document.getElementById('cbaudio')
+    myAudio.play();
+    musicLogo.addEventListener("click",function(){
+        
+        isPlaying ? myAudio.pause() : myAudio.play();
+        isPlaying ? musicLogo.style.border = "2px solid red" : musicLogo.style.border = "none";
+    })
+    myAudio.onplaying = function() {
+        isPlaying = true;
+    };
+    myAudio.onpause = function() {
+        isPlaying = false;
+    };
 </script>
 </html>

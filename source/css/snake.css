@@ -65,6 +65,11 @@
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
   }
+  .musicImg {
+    width: 44px;
+    height: 44px;
+    color:red;
+  }
   .btns {
     display: flex;
     flex-direction: column;

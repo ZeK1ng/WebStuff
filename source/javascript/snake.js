@@ -45,7 +45,20 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
-      
+        document.getElementById("save-btn").addEventListener('click',this._saveData);  
+    }
+    _saveData() {
+        // console.log(this._highScore)
+        // localStorage.setItem('userHighScore',this._highScore)
+        var data = JSON.parse(localStorage.getItem('userData'))
+        console.log(data)
+        for (let i = 0; i< data.length ; i++){
+            if(data[i].name == localStorage.getItem('activeUser')){
+                data[i].userHighScore   = localStorage.getItem('userHighScore')
+            }
+        }
+        console.log(data)
+        localStorage.setItem('userData',JSON.stringify(data));
     }
     /**
      * Getter Methods
@@ -228,6 +241,7 @@ class Snake{
         }
         this._direction="right";
         this._score =0;
+        this._superFruitCount = 0   
         document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
         document.get
         this._addFruit();
