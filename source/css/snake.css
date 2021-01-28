@@ -70,6 +70,14 @@
     height: 44px;
     color:red;
   }
+  .box-wall {
+    background-color: purple;
+    width: 20px;
+    /* margin-right:10px; */
+    height: 20px;
+    position: absolute;
+    border:1px solid white;
+  }
   .btns {
     display: flex;
     flex-direction: column;

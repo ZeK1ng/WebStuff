@@ -1,0 +1,86 @@
+<!DOCTYPE html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/snake.css">
+    <!-- <link rel="stylesheet" href="responsive.css">-->
+    <script type ="module" src="../javascript/snake2.js"></script> 
+</head>
+<body class = "background">
+    
+    <div class = "container">
+        <img id="playMusic" src="../../assets/notelogo.jpg" class="musicImg" >   
+        <audio loop id ="cbaudio" src="../../assets/cbmusic.mp3" preload="auto"></audio>
+        <div class ="wrapper">
+            <div class="controls">
+                <div class="control-item">
+                    <span class="control-txt">Up</span>
+                    <i class="arrow up"></i>
+                </div>
+                <div class="control-item">
+                    <span class="control-txt">Down</span>
+                    <i class="arrow down"></i>
+                </div>
+                <div class="control-item">
+                    <span class="control-txt">Left</span>
+                    <i class="arrow left"></i>
+                </div>
+                <div class="control-item">
+                    <span class="control-txt">Rigth</span>
+                    <i class="arrow right"></i>
+                </div>
+                <div class="control-item spacebar-item">
+                    <span class="control-txt">Boost</span>
+                    <div class="space-bar">Space</div>
+                </div>
+            </div>
+            <div class="screen-holder">
+                <span class="SnakeText">Level 2</span>
+                <div class = "screen" id = "screen-id">
+                    <!--game elements -->
+                </div>
+            </div>
+         
+            <div class = "btns" id="btns-id">
+                <span class="SnakeText" id="PlayerNameHolder"></span>
+                <div class ="SnakeText" id="userHighScore"></div>
+                <div class="SnakeText" id="currScoreUser"></div>
+                <button class="button" id="save-btn">Save</button>
+                <button class="button" id="quit-btn">Quit</button>
+                <!-- next level button -->
+            </div>
+            
+        </div>
+    </div>
+</body>
+<script>
+    const userName = localStorage.getItem('activeUser')
+    var userHighscore = localStorage.getItem('userHighScore')
+    console.log(userName)
+    document.getElementById("PlayerNameHolder").innerHTML=userName
+    document.getElementById("userHighScore").innerHTML ="HighScore: "+ userHighscore
+    document.getElementById("currScoreUser").innerHTML ="currentScore: "+ 0
+    // document.getElementById("save-btn").addEventListener('click',saveData);
+    document.getElementById('quit-btn').addEventListener('click',quitGame);
+    function quitGame(){
+        window.location.href = 'userPage.html';   
+    }
+    var musicLogo = document.getElementById("playMusic")
+    var isPlaying = false;
+    var myAudio = document.getElementById('cbaudio')
+    myAudio.play();
+    musicLogo.addEventListener("click",function(){
+        
+        isPlaying ? myAudio.pause() : myAudio.play();
+        isPlaying ? musicLogo.style.border = "2px solid red" : musicLogo.style.border = "none";
+    })
+    myAudio.onplaying = function() {
+        isPlaying = true;
+    };
+    myAudio.onpause = function() {
+        isPlaying = false;
+    };
+</script>
+</html>
