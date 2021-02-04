@@ -104,8 +104,12 @@ document.addEventListener('click',function(e){
  });
 
  
- document.getElementById('play').addEventListener('click', function(){
+ document.getElementById('play-classic').addEventListener('click', function(){
     // window.location.href='/WebStuff/source/html/snake.html';
-    window.location.href='snake.html';
+    window.location.href='snakeClassic.html';
 
+ });
+ document.getElementById('play-Campaign').addEventListener('click', function(){
+    // window.location.href='/WebStuff/source/html/snake.html';
+    window.location.href='snake1.html';
  });

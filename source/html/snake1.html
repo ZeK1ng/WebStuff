@@ -5,25 +5,14 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Document</title>
     <link rel="stylesheet" href="../css/snake.css">
-    <!-- <link rel="stylesheet" href="../css/snake.css"> -->
     <!-- <link rel="stylesheet" href="responsive.css">-->
-    <script type ="module" src="../javascript/snake2.js"></script> 
+    <script type ="module" src="../javascript/snake1.js"></script> 
 </head>
-<style>
-    .background{
-    /* background-color: #375; */
-    background-image:url(../../assets/CosmNebula.jpg);
-    background-repeat: no-repeat;
-    background-color: black;
-    background-size: cover;
-    
-    }
-</style>
 <body class = "background">
     
     <div class = "container">
         <img id="playMusic" src="../../assets/notelogo.jpg" class="musicImg" >   
-        <audio loop id ="cbaudio" src="../../assets/n u a g e s - Dreams.mp3" preload="auto"></audio>
+        <audio loop id ="cbaudio" src="../../assets/cbmusic.mp3" preload="auto"></audio>
         <div class ="wrapper">
             <div class="controls">
                 <div class="control-item">
@@ -48,8 +37,8 @@
                 </div>
             </div>
             <div class="screen-holder">
-                <span class="SnakeText">Level 2</span>
-                <span class="SnakeText" id="snktxt">Fruit Left: All</span>
+                <span class="SnakeText">Level 1</span>
+                <span class="SnakeText" id="fruitNumIndicator"></span>
                 <div class = "screen" id = "screen-id">
                     <!--game elements -->
                 </div>
@@ -61,6 +50,8 @@
                 <div class="SnakeText" id="currScoreUser"></div>
                 <button class="button" id="save-btn">Save</button>
                 <button class="button" id="quit-btn">Quit</button>
+                <!-- <button class="button nextLevelbtn" id="nextLvl">Next Level</button> -->
+            
                 <!-- next level button -->
             </div>
             
@@ -68,7 +59,7 @@
     </div>
 </body>
 <style>
-    #snktxt {
+    #fruitNumIndicator{
         margin-top: initial;
     }
 </style>

@@ -21,15 +21,6 @@ const key_left = "37";
          col :0
      },
  ]
- const walls = [{ row:0,col:16},{row:1,col:16},{row:2,col:16},{row:3,col:16 },{row:4,col:16},{row:5,col:16},{row:6,col:16},{row:7,col:16},
-                {row:20,col:0},{row:20,col:1},{row:20,col:2},{row:20,col:3},{row:20,col:4},{row:20,col:5},{row:20,col:6},{row:20,col:7},{row:20,col:8},{row:20,col:9},
-                {row:30,col:0},{row:30,col:1},{row:30,col:2},{row:30,col:3},{row:30,col:4},{row:30,col:5},{row:30,col:6},{row:30,col:7},{row:30,col:8},{row:30,col:9}, 
-                {row:30,col:10},{row:30,col:11},{row:30,col:12},{row:30,col:13},{row:30,col:14},{row:30,col:15},{row:30,col:16},{row:30,col:17},{row:30,col:18},
-                {row:30,col:21},{row:30,col:22},{row:30,col:23},{row:30,col:24},{row:30,col:25},{row:30,col:26},{row:30,col:27},{row:30,col:28},{row:30,col:29},
-                {row:30,col:30},{row:30,col:31},{row:30,col:32},{row:30,col:33},    
-                {row:15,col:33},{row:15,col:32},{row:15,col:31},{row:15,col:30},{row:15,col:29},{row:15,col:28},{row:15,col:27},{row:15,col:26},{row:15,col:25},
-                {row:15,col:15},{row:15,col:16},{row:15,col:17},{row:14,col:15},{row:14,col:16},{row:14,col:17},{row:16,col:15},{row:16,col:16},{row:16,col:17},      
-            ]
 
 class Snake{
     constructor(){
@@ -42,9 +33,9 @@ class Snake{
         this._direction = "right";
         this._superFruitCount = 0
         this._snake=JSON.parse(JSON.stringify(startBody));
-        this._walls = JSON.parse(JSON.stringify(walls));
         this._snakeBodyElems=[];
         this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
+        this._fruitLeft = 10;
         this._fruit=[
             {
                 row: 0,
@@ -56,8 +47,8 @@ class Snake{
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
         document.getElementById("save-btn").addEventListener('click',this._saveData);  
+        this._updateFruitLeft()
         document.getElementById('quit-btn').addEventListener('click',this._quitGame);
-  
     }
     _quitGame(){
         var data = JSON.parse(localStorage.getItem('userData'))
@@ -69,8 +60,7 @@ class Snake{
         }
         console.log(data)
         localStorage.setItem('userData',JSON.stringify(data));
-        window.location.href = 'userPage.html';   
-        
+        window.location.href = 'userPage.html';  
     }
     _saveData() {
         // console.log(this._highScore)
@@ -84,6 +74,9 @@ class Snake{
         }
         console.log(data)
         localStorage.setItem('userData',JSON.stringify(data));
+    }
+    _updateFruitLeft(){
+        document.getElementById("fruitNumIndicator").innerHTML = "Fruits Left: "+this._fruitLeft
     }
     /**
      * Getter Methods
@@ -155,7 +148,7 @@ class Snake{
         if(e.keyCode==key_down && this._direction != "up"){
             this._direction = "down";
         }
-        if(e.keyCode == key_space && this._gameon) { 
+        if(e.keyCode == key_space && this._gameon) {
             for(var i =1; i<3;i++){
                 this._moveSnakeOneStep()
             }
@@ -167,25 +160,8 @@ class Snake{
      */
     _setupBoard(){
        this._addButtons();
-       this._addWalls();
        this._addSnake();
        this._addFruit();
-    }
-
-    /***
-     * Does what it says
-     */
-    _addWalls() {
-        // console.log()
-        for(let i =0; i<this._walls.length; i++){
-            const elem = document.createElement("div");
-            elem.className="box-wall";
-            elem.id = "box-id";
-            elem.style.top=this._walls[i].row*this._boxSize+"px";
-            elem.style.left=this._walls[i].col*this._boxSize+"px";
-            this._screen.append(elem);
-            // this._snakeBodyElems.push(elem);
-        }
     }
     /**
      * setting board up 
@@ -262,9 +238,7 @@ class Snake{
         while(true){
             newRow=Math.floor(Math.random()*(this._maxRows-1));
             newCol = Math.floor(Math.random()*(this._maxCols-1));
-            if(this._snake.filter(cords=> cords.col==newCol && cords.row==newRow).length ==0 
-                && this._walls.filter(cords=>cords.col == newCol && cords.row == newRow).length == 0
-            ) break;
+            if(this._snake.filter(cords=> cords.col==newCol && cords.row==newRow).length ==0) break;
         }
         this._fruit[0].row=newRow;
         this._fruit[0].col=newCol;
@@ -287,10 +261,9 @@ class Snake{
         this._score =0;
         this._superFruitCount = 0   
         document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
-        // document.get
-        this._addWalls();
-        this._addSnake();
+        this._fruitLeft = 10
         this._addFruit();
+        this._addSnake();
     }
 
     /**
@@ -360,6 +333,7 @@ class Snake{
                     localStorage.setItem('userHighScore',this._highScore)
                 }
                 isFruit=true;
+                this._updateGameStateAfterFruit()
             }else{
                 const fruit = document.getElementById("fruit-id");
                 this._screen.removeChild(fruit);
@@ -377,6 +351,7 @@ class Snake{
                     localStorage.setItem('userHighScore',this._highScore)
                 }
                 isFruit=true;
+                this._updateGameStateAfterFruit()
             }
         }
         if(!isFruit){
@@ -393,6 +368,21 @@ class Snake{
         this._snakeBodyElems.unshift(newHead);
       
     }
+    _updateGameStateAfterFruit(){
+        this._fruitLeft--
+        this._updateFruitLeft()
+        if(this._fruitLeft == 0) {
+            this._pauseGame()
+            alert("Congratulations. You can go to Level 2");
+            // document.getElementById("nextLvl").style.border = '2px solid green !important'
+            // document.getElementById("nextLvl").style.pointerEvents = "all";
+            this._goToNextLevel();
+        }
+    }
+    _goToNextLevel(){
+        this._saveData()
+        window.location.href ="snake2.html"
+    }
     /**
      * 
      * @param {The next row the snake is going to be at the next moment of time} nextRow 
@@ -404,12 +394,10 @@ class Snake{
      */
     _checkBounds(nextRow,nextCol){
        if(nextRow< 0 || nextRow>=this._maxRows || nextCol< 0 || nextCol>=this._maxCols
-          || this._snake.filter(cords=> cords.row==nextRow && cords.col== nextCol).length != 0
-          || this._walls.filter(cords => cords.row ==nextRow && cords.col == nextCol).length !=0
-          )
+          || this._snake.filter(cords=> cords.row==nextRow && cords.col== nextCol).length != 0)
        {
             // let currMaxScore = localStorage.getItem("maxScore");
-            // if(this._score > currMaxScore){{row:15,col:33},
+            // if(this._score > currMaxScore){
             //     alert("Congratulations. New HighScore is set");
             // }
             // currMaxScore=Math.max(currMaxScore,this._score);

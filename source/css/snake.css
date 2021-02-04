@@ -15,7 +15,10 @@
     background-size: cover;
     
 }
-
+.nextLevelbtn {
+  /* border:  2px solid red !important; */
+  pointer-events: none;
+}
 .wrapper{
     display:flex;
     /* flex-direction: column; */

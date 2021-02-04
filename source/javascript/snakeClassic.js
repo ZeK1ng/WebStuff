@@ -35,6 +35,7 @@ class Snake{
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
         this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
+        this._fruitEaten = 0
         this._fruit=[
             {
                 row: 0,
@@ -46,6 +47,13 @@ class Snake{
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
         document.getElementById("save-btn").addEventListener('click',this._saveData);  
+        this._updateEatenFruits(this._fruitEaten)
+        document.getElementById('quit-btn').addEventListener('click',this._quitGame); 
+    }
+
+  
+    _updateEatenFruits(){
+        document.getElementById("fuits-eaten").innerHTML = "Fruits Eaten: "+this._fruitEaten
     }
     _saveData() {
         // console.log(this._highScore)
@@ -59,6 +67,18 @@ class Snake{
         }
         console.log(data)
         localStorage.setItem('userData',JSON.stringify(data));
+    }
+    _quitGame(){
+        var data = JSON.parse(localStorage.getItem('userData'))
+        console.log(data)
+        for (let i = 0; i< data.length ; i++){
+            if(data[i].name == localStorage.getItem('activeUser')){
+                data[i].userHighScore   = localStorage.getItem('userHighScore')
+            }
+        }
+        console.log(data)
+        localStorage.setItem('userData',JSON.stringify(data));
+        window.location.href = 'userPage.html';   
     }
     /**
      * Getter Methods
@@ -130,7 +150,7 @@ class Snake{
         if(e.keyCode==key_down && this._direction != "up"){
             this._direction = "down";
         }
-        if(e.keyCode == key_space) {
+        if(e.keyCode == key_space && this._gameon) {
             for(var i =1; i<3;i++){
                 this._moveSnakeOneStep()
             }
@@ -243,7 +263,8 @@ class Snake{
         this._score =0;
         this._superFruitCount = 0   
         document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
-        document.get
+        this._fruitEaten = 0;
+        this._updateEatenFruits();
         this._addFruit();
         this._addSnake();
     }
@@ -315,6 +336,8 @@ class Snake{
                     localStorage.setItem('userHighScore',this._highScore)
                 }
                 isFruit=true;
+                this._fruitEaten++;
+                this._updateEatenFruits()
             }else{
                 const fruit = document.getElementById("fruit-id");
                 this._screen.removeChild(fruit);
@@ -332,6 +355,8 @@ class Snake{
                     localStorage.setItem('userHighScore',this._highScore)
                 }
                 isFruit=true;
+                this._fruitEaten++;
+                this._updateEatenFruits()
             }
         }
         if(!isFruit){

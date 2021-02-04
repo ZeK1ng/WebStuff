@@ -5,14 +5,25 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     <title>Document</title>
     <link rel="stylesheet" href="../css/snake.css">
+    <!-- <link rel="stylesheet" href="../css/snake.css"> -->
     <!-- <link rel="stylesheet" href="responsive.css">-->
-    <script type ="module" src="../javascript/snake.js"></script> 
+    <script type ="module" src="../javascript/snakeClassic.js"></script> 
 </head>
+<style>
+    .background{
+    /* background-color: #375; */
+    background-image:url(../../assets/Ouroboros.png);
+    background-repeat: no-repeat;
+    background-color: black;
+    background-size: cover;
+    
+    }
+</style>
 <body class = "background">
     
     <div class = "container">
         <img id="playMusic" src="../../assets/notelogo.jpg" class="musicImg" >   
-        <audio loop id ="cbaudio" src="../../assets/cbmusic.mp3" preload="auto"></audio>
+        <audio loop id ="cbaudio" src="../../assets/n u a g e s - Dreams.mp3" preload="auto"></audio>
         <div class ="wrapper">
             <div class="controls">
                 <div class="control-item">
@@ -37,7 +48,8 @@
                 </div>
             </div>
             <div class="screen-holder">
-                <span class="SnakeText">Level 1</span>
+                <span class="SnakeText">Classic</span>
+                <span class="SnakeText" id="fuits-eaten"></span>
                 <div class = "screen" id = "screen-id">
                     <!--game elements -->
                 </div>
@@ -55,6 +67,11 @@
         </div>
     </div>
 </body>
+<style>
+    #fuits-eaten {
+        margin-top: initial;
+    }
+</style>
 <script>
     const userName = localStorage.getItem('activeUser')
     var userHighscore = localStorage.getItem('userHighScore')
@@ -63,10 +80,7 @@
     document.getElementById("userHighScore").innerHTML ="HighScore: "+ userHighscore
     document.getElementById("currScoreUser").innerHTML ="currentScore: "+ 0
     // document.getElementById("save-btn").addEventListener('click',saveData);
-    document.getElementById('quit-btn').addEventListener('click',quitGame);
-    function quitGame(){
-        window.location.href = 'userPage.html';   
-    }
+  
     var musicLogo = document.getElementById("playMusic")
     var isPlaying = false;
     var myAudio = document.getElementById('cbaudio')
