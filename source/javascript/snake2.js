@@ -22,12 +22,11 @@ const key_left = "37";
      },
  ]
  const walls = [{ row:0,col:16},{row:1,col:16},{row:2,col:16},{row:3,col:16 },{row:4,col:16},{row:5,col:16},{row:6,col:16},{row:7,col:16},
-                {row:20,col:0},{row:20,col:1},{row:20,col:2},{row:20,col:3},{row:20,col:4},{row:20,col:5},{row:20,col:6},{row:20,col:7},{row:20,col:8},{row:20,col:9},
-                {row:30,col:0},{row:30,col:1},{row:30,col:2},{row:30,col:3},{row:30,col:4},{row:30,col:5},{row:30,col:6},{row:30,col:7},{row:30,col:8},{row:30,col:9}, 
-                {row:30,col:10},{row:30,col:11},{row:30,col:12},{row:30,col:13},{row:30,col:14},{row:30,col:15},{row:30,col:16},{row:30,col:17},{row:30,col:18},
-                {row:30,col:21},{row:30,col:22},{row:30,col:23},{row:30,col:24},{row:30,col:25},{row:30,col:26},{row:30,col:27},{row:30,col:28},{row:30,col:29},
-                {row:30,col:30},{row:30,col:31},{row:30,col:32},{row:30,col:33},    
-                {row:15,col:33},{row:15,col:32},{row:15,col:31},{row:15,col:30},{row:15,col:29},{row:15,col:28},{row:15,col:27},{row:15,col:26},{row:15,col:25},
+                {row:12,col:0},{row:12,col:1},{row:12,col:2},{row:12,col:3},{row:12,col:4},{row:12,col:5},{row:12,col:6},{row:12,col:7},{row:12,col:8},{row:12,col:9},
+                {row:25,col:0},{row:25,col:1},{row:25,col:2},{row:25,col:3},{row:25,col:4},{row:25,col:5},{row:25,col:6},{row:25,col:7},{row:25,col:8},{row:25,col:9}, 
+                {row:25,col:10},{row:25,col:11},{row:25,col:12},{row:25,col:13},{row:25,col:14},{row:25,col:15},{row:25,col:16},
+                {row:25,col:21},{row:25,col:22},{row:25,col:23},{row:25,col:24},{row:25,col:25},{row:25,col:26},{row:25,col:27},{row:25,col:28},   
+                {row:15,col:28},{row:15,col:27},{row:15,col:26},{row:15,col:25},{row:15,col:24},{row:15,col:23},{row:15,col:22},{row:15,col:21},
                 {row:15,col:15},{row:15,col:16},{row:15,col:17},{row:14,col:15},{row:14,col:16},{row:14,col:17},{row:16,col:15},{row:16,col:16},{row:16,col:17},      
             ]
 

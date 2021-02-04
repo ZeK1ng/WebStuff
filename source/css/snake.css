@@ -140,6 +140,10 @@
                 color 0.6s cubic-bezier(0.20, 1, 0.22, 1);
       user-select: none;
 }
+#snktxt {
+  margin-top: initial;
+  margin-bottom: 32px;
+}
 .button:hover{
   background-color: rgba(209, 204, 204, 0.05);
     border-color: #fff;
@@ -160,12 +164,12 @@
 @import url("https://fonts.googleapis.com/css?family=Sacramento&display=swap");
 .screen{
     margin-top: 50%;
-    width: 700px;
-    height: 700px;
+    width: 600px;
+    height: 600px;
     display: block;
     margin: 5px auto;
     border: 10px solid #ffa500;
-    box-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+    box-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 20px #ff0000;
 
     background-color:transparent;
     align-self: center;
@@ -177,15 +181,15 @@
         0 0 20px #f562ff, 0 0 30px #890092, 0 0 80px #890092, 0 0 80px #890092;
       color: #fccaff; */
       align-self: center;
-      font-size: 48px;
+      font-size: 34px;
       text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
       color: #fff6a9;
       font-family: "Sacramento", cursive;
       text-align: center;
       /* animation: blink 5s infinite; */
       /* -webkit-animation: blink 5s infinite; */
-      margin-top: 44px;
-      margin-bottom: 44px;
+      margin-top: 24px;
+      margin-bottom: 12px;
     }
     @-webkit-keyframes blink {
       20%,
