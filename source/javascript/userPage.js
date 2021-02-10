@@ -97,3 +97,6 @@ document.addEventListener('click',function(e){
         modal.style.display = 'none';  
      }
  });
+ document.getElementById('play').addEventListener('click', function(){
+    window.location.href='snake.html';
+ });
