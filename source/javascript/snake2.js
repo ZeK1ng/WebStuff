@@ -54,19 +54,16 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
-        document.getElementById("save-btn").addEventListener('click',this._saveData);  
-        document.getElementById('quit-btn').addEventListener('click',this._quitGame);
+
   
     }
     _quitGame(){
         var data = JSON.parse(localStorage.getItem('userData'))
-        console.log(data)
         for (let i = 0; i< data.length ; i++){
             if(data[i].name == localStorage.getItem('activeUser')){
                 data[i].userHighScore   = localStorage.getItem('userHighScore')
             }
         }
-        console.log(data)
         localStorage.setItem('userData',JSON.stringify(data));
         window.location.href = 'userPage.html';   
         
@@ -75,13 +72,11 @@ class Snake{
         // console.log(this._highScore)
         // localStorage.setItem('userHighScore',this._highScore)
         var data = JSON.parse(localStorage.getItem('userData'))
-        console.log(data)
         for (let i = 0; i< data.length ; i++){
             if(data[i].name == localStorage.getItem('activeUser')){
                 data[i].userHighScore   = localStorage.getItem('userHighScore')
             }
         }
-        console.log(data)
         localStorage.setItem('userData',JSON.stringify(data));
     }
     /**
@@ -215,6 +210,18 @@ class Snake{
         resetBtn.value = "RESET";
         resetBtn.addEventListener("click",this._resetGame.bind(this))
         document.getElementById("btns-id").append(resetBtn);
+        const saveBtn = document.createElement("input");
+        saveBtn.type = "button";
+        saveBtn.className="button reset-btn";
+        saveBtn.value = "SAVE";
+        saveBtn.addEventListener("click",this._saveData.bind(this))
+        document.getElementById("btns-id").append(saveBtn);
+        const quitBtn = document.createElement("input");
+        quitBtn.type = "button";
+        quitBtn.className="button reset-btn";
+        quitBtn.value = "QUIT";
+        quitBtn.addEventListener("click",this._quitGame.bind(this))
+        document.getElementById("btns-id").append(quitBtn);
     }
     /**
      * Draws snake at the start position

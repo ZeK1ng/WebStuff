@@ -175,6 +175,18 @@
     align-self: center;
     position: relative;
 }
+.control-btn-txt {
+  color: #fff6a9;
+  font-size: 36px;
+  margin-left: 24px;
+  text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+
+}
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 .SnakeText{
 
     /*   text-shadow: 0 0 5px #f562ff, 0 0 15px #f562ff, 0 0 25px #f562ff,

@@ -3,6 +3,8 @@ const key_left = "37";
  const key_down = "40";
  const key_up="38";
  const key_space = '32';
+ const key_pause = "80";
+ const key_reset = "82";
  const startBody = [
      {
          row:0,
@@ -46,9 +48,7 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
-        document.getElementById("save-btn").addEventListener('click',this._saveData);  
         this._updateEatenFruits(this._fruitEaten)
-        document.getElementById('quit-btn').addEventListener('click',this._quitGame); 
     }
 
   
@@ -59,24 +59,24 @@ class Snake{
         // console.log(this._highScore)
         // localStorage.setItem('userHighScore',this._highScore)
         var data = JSON.parse(localStorage.getItem('userData'))
-        console.log(data)
+
         for (let i = 0; i< data.length ; i++){
             if(data[i].name == localStorage.getItem('activeUser')){
                 data[i].userHighScore   = localStorage.getItem('userHighScore')
             }
         }
-        console.log(data)
+    
         localStorage.setItem('userData',JSON.stringify(data));
     }
     _quitGame(){
         var data = JSON.parse(localStorage.getItem('userData'))
-        console.log(data)
+  
         for (let i = 0; i< data.length ; i++){
             if(data[i].name == localStorage.getItem('activeUser')){
                 data[i].userHighScore   = localStorage.getItem('userHighScore')
             }
         }
-        console.log(data)
+  
         localStorage.setItem('userData',JSON.stringify(data));
         window.location.href = 'userPage.html';   
     }
@@ -155,6 +155,16 @@ class Snake{
                 this._moveSnakeOneStep()
             }
         }
+        if(e.keyCode == key_reset) {
+            this._resetGame();
+        }
+        if(e.keyCode == key_pause) {
+            if(this._gameon){
+                this._pauseGame();
+            }else {
+                this._startNewGame();
+            }
+        }
     }
 
     /**
@@ -180,12 +190,14 @@ class Snake{
         startbtn.type = "button";
         startbtn.className="button";
         startbtn.value = "START";
+        startbtn.setAttribute("id","start-btn-id");
         startbtn.addEventListener("click",this._startNewGame.bind(this))
         document.getElementById("btns-id").append(startbtn);
         const pauseBtn = document.createElement("input");
         pauseBtn.type = "button";
         pauseBtn.className="button pause-btn";
         pauseBtn.value = "PAUSE";
+        pauseBtn.setAttribute("id","pause-btn-id");
         pauseBtn.addEventListener("click",this._pauseGame.bind(this))
         document.getElementById("btns-id").append(pauseBtn);
         const resetBtn = document.createElement("input");
@@ -194,6 +206,18 @@ class Snake{
         resetBtn.value = "RESET";
         resetBtn.addEventListener("click",this._resetGame.bind(this))
         document.getElementById("btns-id").append(resetBtn);
+        const saveBtn = document.createElement("input");
+        saveBtn.type = "button";
+        saveBtn.className="button reset-btn";
+        saveBtn.value = "SAVE";
+        saveBtn.addEventListener("click",this._saveData.bind(this))
+        document.getElementById("btns-id").append(saveBtn);
+        const quitBtn = document.createElement("input");
+        quitBtn.type = "button";
+        quitBtn.className="button reset-btn";
+        quitBtn.value = "QUIT";
+        quitBtn.addEventListener("click",this._quitGame.bind(this))
+        document.getElementById("btns-id").append(quitBtn);
     }
     /**
      * Draws snake at the start position
@@ -275,6 +299,7 @@ class Snake{
     _pauseGame(){
         this._gameon=false;
         clearInterval(this.interval);
+        document.getElementById("start-btn-id").value = "RESUME";
     }
     /**
      * Sets  the Interval and starts the new game. If a game is currently running , does nothing.
@@ -285,6 +310,7 @@ class Snake{
         }
         this._gameon=true;
         this.interval = setInterval(this.playGame.bind(this),100);
+        document.getElementById("start-btn-id").value = "START";
     }
 
     /**
