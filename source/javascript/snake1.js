@@ -37,7 +37,7 @@ class Snake{
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
         this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
-        this._fruitLeft = 1;
+        this._fruitLeft = 10;
         this._fruit=[
             {
                 row: 0,

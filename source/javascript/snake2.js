@@ -41,7 +41,7 @@ class Snake{
         this._maxCols = this._maxWidth/this._boxSize;
         this._gameon=false;
         this._direction = "right";
-        this._superFruitCount = 10
+        this._superFruitCount = 0
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._walls = JSON.parse(JSON.stringify(walls));
         this._snakeBodyElems=[];
