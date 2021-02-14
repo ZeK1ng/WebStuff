@@ -48,6 +48,7 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
+        
         this._modalOpen = false
         this._updateFruitLeft()
     }
