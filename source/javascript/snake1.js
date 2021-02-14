@@ -3,6 +3,8 @@ const key_left = "37";
  const key_down = "40";
  const key_up="38";
  const key_space = '32';
+ const key_pause = "80";
+ const key_reset = "82";
  const startBody = [
      {
          row:0,
@@ -35,7 +37,7 @@ class Snake{
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
         this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
-        this._fruitLeft = 10;
+        this._fruitLeft = 1;
         this._fruit=[
             {
                 row: 0,
@@ -46,6 +48,7 @@ class Snake{
         this._scoreBoard= document.getElementById("score-id");
         this._maxScoreBoard = document.getElementById("max-score-id");
         this._score =0;
+        this._modalOpen = false
         this._updateFruitLeft()
     }
     _quitGame(){
@@ -151,6 +154,16 @@ class Snake{
                 this._moveSnakeOneStep()
             }
         }
+        if(e.keyCode == key_reset) {
+            this._resetGame();
+        }
+        if(e.keyCode == key_pause) {
+            if(this._gameon){
+                this._pauseGame();
+            }else {
+                this._startNewGame();
+            }
+        }
     }
 
     /**
@@ -177,6 +190,7 @@ class Snake{
         startbtn.className="button";
         startbtn.value = "START";
         startbtn.addEventListener("click",this._startNewGame.bind(this))
+        startbtn.setAttribute("id","start-btn-id");
         document.getElementById("btns-id").append(startbtn);
         const pauseBtn = document.createElement("input");
         pauseBtn.type = "button";
@@ -259,6 +273,9 @@ class Snake{
      * Handles Game reset , by returning it to starting State.
      */
     _resetGame(){
+        if(this._modalOpen) {
+            this._hideModal()
+        }
         this._pauseGame();
         this._snake = JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
@@ -283,18 +300,30 @@ class Snake{
     _pauseGame(){
         this._gameon=false;
         clearInterval(this.interval);
+        document.getElementById("start-btn-id").value = "RESUME";
+
     }
     /**
      * Sets  the Interval and starts the new game. If a game is currently running , does nothing.
      */
     _startNewGame(){
+        if(this._modalOpen){
+            this._hideModal();
+            this._resetGame();
+        }   
         if(this._gameon){
             return;
         }
         this._gameon=true;
         this.interval = setInterval(this.playGame.bind(this),100);
-    }
+        document.getElementById("start-btn-id").value = "START";
 
+    }
+    _hideModal(){
+        const modal= document.getElementById('modal');
+        modal.style.display = 'None';
+        this._modalOpen = false
+    }
     /**
      * Game process
      */
@@ -384,11 +413,47 @@ class Snake{
         this._updateFruitLeft()
         if(this._fruitLeft == 0) {
             this._pauseGame()
-            alert("Congratulations. You can go to Level 2");
-            // document.getElementById("nextLvl").style.border = '2px solid green !important'
-            // document.getElementById("nextLvl").style.pointerEvents = "all";
-            this._goToNextLevel();
+            // alert("Congratulations. You can go to Level 2");\
+            const modal= document.getElementById('modal');
+            modal.innerHTML ='';
+            var modalHeader = document.createElement('div')
+            modalHeader.className =('modal-header');
+            var headerText = document.createElement('H2');
+            headerText.className = ('modal-header-txt');
+            headerText.appendChild(document.createTextNode('Congratulations!'));
+            var headerSpan = document.createElement('SPAN');
+            headerSpan.innerHTML="&times;";
+            headerSpan.className = ('close');
+            headerSpan.id = ('close');
+            modalHeader.appendChild(headerText);
+            modalHeader.appendChild(headerSpan);
+            modal.append(modalHeader);
+            var modalTExt = document.createElement('div')
+            modalTExt.className = ('modal-header-txt');
+            modalTExt.appendChild(document.createTextNode('You cleared Level 1. Would you like to go to Level 2?'));
+            modal.append(modalTExt);
+            const yesBtn = document.createElement("input");
+            yesBtn.type = "button";
+            yesBtn.className="button reset-btn";
+            yesBtn.value = "Yes";
+            // yesBtn.style.marginLeft = "20px";
+            yesBtn.addEventListener("click",this._goToNextLevel.bind(this))
+            modal.append(yesBtn);
+            const NoBtn = document.createElement("input");
+            NoBtn.type = "button";
+            NoBtn.className="button reset-btn";
+            NoBtn.value = "No";
+            // yesBtn.style.marginLeft = "20px";
+            NoBtn.addEventListener("click",this._closeModalAndResetGame.bind(this))
+            modal.append(NoBtn)
+            modal.style.display = 'flex';
+            this._modalOpen = true
         }
+    }
+    _closeModalAndResetGame() {
+        const modal= document.getElementById('modal');
+        modal.style.display = 'None';
+        this._resetGame()
     }
     _goToNextLevel(){
         this._saveData()

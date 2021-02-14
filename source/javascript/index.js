@@ -82,6 +82,9 @@ function login(){
     }
 }
 function _containsUser(data,userName,password){
+    if(data == null) {
+        return -1;
+    }
     for (var i = 0 ; i< data.length; i++) {
         if(data[i].name ==userName && data[i].password == password){
             return i;

@@ -3,6 +3,8 @@ const key_left = "37";
  const key_down = "40";
  const key_up="38";
  const key_space = '32';
+ const key_pause = "80";
+ const key_reset = "82";
  const startBody = [
      {
          row:0,
@@ -39,7 +41,7 @@ class Snake{
         this._maxCols = this._maxWidth/this._boxSize;
         this._gameon=false;
         this._direction = "right";
-        this._superFruitCount = 0
+        this._superFruitCount = 10
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._walls = JSON.parse(JSON.stringify(walls));
         this._snakeBodyElems=[];
@@ -154,6 +156,16 @@ class Snake{
                 this._moveSnakeOneStep()
             }
         }
+        if(e.keyCode == key_reset) {
+            this._resetGame();
+        }
+        if(e.keyCode == key_pause) {
+            if(this._gameon){
+                this._pauseGame();
+            }else {
+                this._startNewGame();
+            }
+        }
     }
 
     /**
@@ -196,6 +208,7 @@ class Snake{
         startbtn.type = "button";
         startbtn.className="button";
         startbtn.value = "START";
+        startbtn.setAttribute("id","start-btn-id");
         startbtn.addEventListener("click",this._startNewGame.bind(this))
         document.getElementById("btns-id").append(startbtn);
         const pauseBtn = document.createElement("input");
@@ -305,6 +318,7 @@ class Snake{
     _pauseGame(){
         this._gameon=false;
         clearInterval(this.interval);
+        document.getElementById("start-btn-id").value = "RESUME";
     }
     /**
      * Sets  the Interval and starts the new game. If a game is currently running , does nothing.
@@ -315,6 +329,7 @@ class Snake{
         }
         this._gameon=true;
         this.interval = setInterval(this.playGame.bind(this),100);
+        document.getElementById("start-btn-id").value = "START";
     }
 
     /**

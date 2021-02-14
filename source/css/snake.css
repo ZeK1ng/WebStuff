@@ -15,6 +15,54 @@
     background-size: cover;
     
 }
+.modal{
+  display: none;
+  position: fixed;
+  z-index: 1;
+  align-self:center;
+  left:37%;
+  min-height: 300px;
+  width:400px;
+  overflow: auto;
+  background-color: rgb(255, 153, 51,0.6);
+  animation-name: modalopen;
+  animation-duration: 1s;
+  border-radius: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-header{
+  display: flex;
+  justify-content: space-between;
+ 
+}
+.modal-header-txt {
+  align-self: center;
+  font-size: 24px;
+  text-shadow: 0 0 5px #ffa500, 0 0 15px #ffa500, 0 0 20px #ffa500, 0 0 40px #ffa500, 0 0 60px #ff0000, 0 0 10px #ff8d00, 0 0 98px #ff0000;
+  color: #fff6a9;
+  font-family: "Sacramento", cursive;
+  text-align: center;
+}
+.close {
+  color: #ccc;
+  float: right;
+  font-size: 30px;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 44px;
+}
+  
+@keyframes modalopen{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .nextLevelbtn {
   /* border:  2px solid red !important; */
   pointer-events: none;
