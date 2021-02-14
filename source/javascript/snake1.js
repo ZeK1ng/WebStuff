@@ -37,7 +37,7 @@ class Snake{
         this._snake=JSON.parse(JSON.stringify(startBody));
         this._snakeBodyElems=[];
         this._highScore = parseInt(localStorage.getItem('userHighScore'),10);
-        this._fruitLeft = 10;
+        this._fruitLeft = 25;
         this._fruit=[
             {
                 row: 0,
@@ -288,7 +288,7 @@ class Snake{
         this._score =0;
         this._superFruitCount = 0   
         document.getElementById("currScoreUser").innerHTML ="currentScore: "+ this._score
-        this._fruitLeft = 10
+        this._fruitLeft = 25
         this._updateFruitLeft()
         this._addFruit();
         this._addSnake();
