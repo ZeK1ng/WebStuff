@@ -348,4 +348,15 @@
   cursor: pointer;
 }
   
-  
+@media only screen and (max-width: 376px) {
+  .glitch {
+    font-size: 64px;
+  }
+  .button {
+    width: 100%;
+    max-width: 280px;
+  }
+  .modal {
+    left: 10%;
+  }
+}

@@ -315,3 +315,64 @@
 .box-super-fruit{
   background-color: red;
 }  
+
+@media only screen and (max-width: 540px) {
+  .controls {
+    display: none;
+  }
+  .btns{
+    display: none;
+  }
+  .background {
+    background-repeat: repeat !important;
+  }
+  .screen {
+    max-width: 400px !important;
+    max-height: 400px !important;
+
+  }
+  .modal {
+    left: 10%;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .screen {
+    max-width: 320px !important;
+    max-height: 320px !important;
+
+  }
+}
+@media only screen and (max-width: 768px) {
+  .screen {
+    max-width: 600px;
+    max-height: 600px;
+  }
+  .controls {
+    display: none;
+  }
+  .btns{
+    display: none;
+  }
+  .background {
+    background-repeat: repeat !important;
+  }
+  .box-wall {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1025px) {
+
+  .controls {
+    display: none;
+  }
+  .btns{
+    display: none;
+  }
+  .background {
+    background-repeat: repeat !important;
+  }
+  .screen {
+    width: 900px;
+    height: 900px;
+  }
+}

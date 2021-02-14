@@ -421,13 +421,13 @@ class Snake{
             var headerText = document.createElement('H2');
             headerText.className = ('modal-header-txt');
             headerText.appendChild(document.createTextNode('Congratulations!'));
-            var headerSpan = document.createElement('SPAN');
-            headerSpan.innerHTML="&times;";
-            headerSpan.className = ('close');
-            headerSpan.id = ('close');
-            modalHeader.appendChild(headerText);
-            modalHeader.appendChild(headerSpan);
-            modal.append(modalHeader);
+            // var headerSpan = document.createElement('SPAN');
+            // headerSpan.innerHTML="&times;";
+            // headerSpan.className = ('close');
+            // headerSpan.id = ('close');
+            // modalHeader.appendChild(headerText);
+            // modalHeader.appendChild(headerSpan);
+            // modal.append(modalHeader);
             var modalTExt = document.createElement('div')
             modalTExt.className = ('modal-header-txt');
             modalTExt.appendChild(document.createTextNode('You cleared Level 1. Would you like to go to Level 2?'));

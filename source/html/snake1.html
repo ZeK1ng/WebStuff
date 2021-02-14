@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../css/snake.css">
     <!-- <link rel="stylesheet" href="responsive.css">-->
@@ -97,5 +97,17 @@
     myAudio.onpause = function() {
         isPlaying = false;
     };
+    const mediaQuery540 = window.matchMedia('(min-width: 540px)')
+    const mediaQuery375 = window.matchMedia('(min-width: 375px)')
+    const mediaQuery414 = window.matchMedia('(min-width: 414px)')
+    const mediaQuery360 = window.matchMedia('(min-width: 360px)')
+    const mediaQuery411 = window.matchMedia('(min-width: 411px)')
+    const mediaQuery768 = window.matchMedia('(min-width: 758px)')
+
+    // Check if the media query is true
+    if (mediaQuery540.matches ||mediaQuery375.matches ||mediaQuery414.matches ||mediaQuery360.matches ||mediaQuery411.matches || mediaQuery768.matches ) {
+    // Then trigger an alert
+        alert('Control with arrows, Space is a boost, Press P for start and pause. Press R for reset')
+    }
 </script>
 </html>
